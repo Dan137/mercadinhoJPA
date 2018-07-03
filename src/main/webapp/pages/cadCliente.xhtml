@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../templates/template.xhtml">
+
+            <ui:insert name="top">
+                <ui:include src="/includes/menu.xhtml"/>
+            </ui:insert>
+
+            <ui:define name="content">
+                <h:form id="idFormCad">
+                    <p:separator/>
+
+                    <p:panelGrid id="pangrid" columns="2"  >
+
+                        <h:outputLabel for='idNome' value="NOME: "/>
+                        <p:inputText  id="idNome" value="#{controlerCliente.cliente.nome}" />
+                       
+                        <h:outputLabel for='idCPF' value="CPF: "/>
+                        <p:inputMask  id= "idCPF" mask="999.999.999-99" value="#{controlerCliente.cliente.cpf}"  />
+
+                        <h:outputLabel for='idEmail' value="E-MAIL: "/>
+                        <p:inputText  id="idEmail" size="50" value="#{controlerCliente.cliente.email}"/>
+
+
+                        <h:outputLabel for='idTelefone' value="TELEFONE: "/>
+                        <p:inputMask id="idTelefone" mask="(99) 99999-9999" value="#{controlerCliente.cliente.telefone}" /> 
+
+
+                        <h:outputLabel for='idRua' value="RUA" />
+                        <p:inputText  id="idRua" value="#{controlerCliente.endereco.rua}" />
+
+                        <h:outputLabel for='idBairro' value="BAIRRO" />
+                        <p:inputText id="idBairro" value="#{controlerCliente.endereco.bairro}" />
+
+                        <h:outputLabel for='idNumero' value="NUMERO"/>
+                        <p:inputText id="idNumero" size="10" value="#{controlerCliente.endereco.numero}" />
+
+                        <h:outputLabel for='idCidade' value="CIDADE"/>
+                        <p:inputText id="idCidade" value="#{controlerCliente.endereco.cidade}" />
+
+                        <h:outputLabel for='idCEP' value="CEP"/>
+                        <p:inputText id="idCEP" value="#{controlerCliente.endereco.cep}" />
+
+                    </p:panelGrid>
+
+                    <p:commandButton value="CADASTRAR" action="#{controlerCliente.cadCliente(controlerCliente.cliente)}"  update=":idFormCad:pangrid :idMSGglobal"/>
+
+
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:form>
+        <p:menubar>
+            <p:submenu label="cliente">
+                <p:menuitem  >
+                    <h:commandLink  value="cadastrar" action="/pages/cadCliente.xhtml"/>
+                </p:menuitem>
+                
+                <p:menuitem >
+                    <h:commandLink value="listar" action="/pages/listaClientes"/>
+            </p:menuitem>
+        </p:submenu>
+
+        <p:submenu label="produto"></p:submenu>
+    </p:menubar>
+</h:form>
+</ui:composition>

@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../templates/template.xhtml">
+
+            <ui:define name="top">
+                <ui:include src="/includes/menu.xhtml"/>
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form id="lstCliente">
+                    <p:dataTable id="singleCli" var="cliente" value="#{controlerCliente.obterClientes()}" rows="10" rowKey="#{cliente.codigo}"
+                                 selection="#{controlerCliente.selectCliente}" selectionMode="single" paginator="true">
+                        <f:facet name="header">
+                            LISTA DE CLIENTES CADASTRADOS
+                        </f:facet>
+
+                        <p:column headerText="CODIGO: " >
+                            <h:outputLabel value="#{cliente.codigo}"/>
+                        </p:column>
+                        <p:column headerText="NOME: " filterBy="#{cliente.nome}">
+                            <h:outputText value="#{cliente.nome}"/>
+                        </p:column>
+                        <p:column headerText="CPF: ">
+                            <h:outputText value="#{cliente.cpf}"/>
+                        </p:column>
+                        <p:column headerText="DATA CADASTRO">
+                            <h:outputText value="#{cliente.dataAbertura}"/>
+                        </p:column>
+
+                        <p:column headerText="E-MAIL: ">
+                            <h:outputText value="#{cliente.email}"/>
+                        </p:column>
+
+                        <p:column headerText="TELEFONE: ">
+                            <h:outputText value="#{cliente.telefone}"/>
+                        </p:column>
+
+                        <p:column headerText="RUA: ">
+                            <h:outputText value="#{cliente.endereco.bairro}"/>
+                        </p:column>
+
+                        <p:column headerText="NÚMERO: ">
+                            <h:outputText value="#{cliente.endereco.numero}"/>
+                        </p:column>
+                        <p:column headerText="CEP: ">
+                            <h:outputText value="#{cliente.endereco.cep}"/>
+                        </p:column>
+
+                        <p:column headerText="OPÇÕES" width="80">
+                            <p:commandButton icon="ui-icon-trash"  oncomplete="PF('cliDialogRem').show();" update=":formRem:panelRem"/> 
+                            <p:commandButton icon="ui-icon-pencil" oncomplete="PF('cliDialogEdit').show();" update=":formEdit:pnlEditar "/>
+                            <p:commandButton icon="ui-icon-search" oncomplete="PF('cliDialogInfo').show();" update=":formSearch:pnlSearch  "/>
+                        </p:column>
+
+                    </p:dataTable>
+                </h:form>
+
+                <p:dialog id="excCliente"  header="DELETAR CLIENTE " widgetVar="cliDialogRem" modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+                          draggable="false" >
+
+                    <h:form id="formRem">
+                        <p:panelGrid id="panelRem" columns="2"  >
+                            <h:outputText value="CÓDIGO"/>
+                            <p:outputLabel value="#{controlerCliente.selectCliente.codigo}"/>
+
+                            <h:outputText value="CPF"/>
+                            <p:outputLabel value="#{controlerCliente.selectCliente.cpf}"/>
+
+                            <h:outputText value="EMAIL"/>
+                            <p:outputLabel value="#{controlerCliente.selectCliente.email}"/>
+
+                            <h:outputText value="NOME"/>
+                            <p:outputLabel value="#{controlerCliente.selectCliente.nome}"/>
+
+                            <h:outputText value="DATA-CADASTRO"/>
+                            <p:outputLabel value="#{controlerCliente.selectCliente.dataAbertura}"/>
+
+                            <h:outputText value="RUA"/>
+                            <p:outputLabel value="#{controlerCliente.selectCliente.endereco.rua}"/>
+
+                            <h:outputText value="BAIRRO"/>
+                            <p:outputLabel value="#{controlerCliente.selectCliente.endereco.cep}"/>
+
+                            <h:outputText value="CIDADE"/>
+                            <p:outputLabel value="#{controlerCliente.selectCliente.endereco.cidade}"/>
+
+                        </p:panelGrid>
+                        <h:panelGrid columns="2">
+                            <p:commandButton value="excluir" actionListener ="#{controlerCliente.deletarCliente(controlerCliente.selectCliente)}" oncomplete="PF('cliDialogRem').hide();"
+                                             update=":lstCliente:singleCli"/>
+
+                        </h:panelGrid>
+
+                    </h:form>
+                </p:dialog>
+
+                <p:dialog id="editCliente" header="EDITAR CLIENTE"  widgetVar="cliDialogEdit" modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+                          draggable="false" >
+                    <h:form id="formEdit">
+                        <p:panelGrid id="pnlEditar" columns="2">
+
+                            <p:outputLabel value="CÓDIGO: "/>
+                            <h:outputLabel value="#{controlerCliente.selectCliente.codigo}"/>
+
+                            <p:outputLabel value="CPF: "/>
+                            <p:inputMask  mask="999.999.999-99"  value="#{controlerCliente.selectCliente.cpf}"/>
+
+                            <p:outputLabel value="NOME: "/>
+                            <p:inputText value="#{controlerCliente.selectCliente.nome}"/>
+
+                            <p:outputLabel value="E-MAIL: "/>
+                            <p:inputText value="#{controlerCliente.selectCliente.email}"/>
+
+                            <p:outputLabel value="TELEFONE: "/>
+                            <p:inputMask id="idTelefone" mask="(99) 99999-9999" value="#{controlerCliente.selectCliente.telefone}"/>
+
+                            <p:outputLabel value="RUA: "/>
+                            <p:inputText value="#{controlerCliente.selectCliente.endereco.rua}"/>
+
+                            <p:outputLabel value="BAIRRO: "/>
+                            <p:inputText value="#{controlerCliente.selectCliente.endereco.bairro}"/>
+
+                            <p:outputLabel value="CIDADE: "/>
+                            <p:inputText value="#{controlerCliente.selectCliente.endereco.cidade}"/>
+
+                            <p:outputLabel value="CEP: "/>
+                            <p:inputText value="#{controlerCliente.selectCliente.endereco.cep}"/>
+
+                            <p:outputLabel value="NUMERO: "/>
+                            <p:inputText value="#{controlerCliente.selectCliente.endereco.numero}"/>
+                        </p:panelGrid>
+                        <p:panelGrid columns="2">
+                            <p:commandButton value="EDITAR" actionListener="#{controlerCliente.updateCliente(controlerCliente.selectCliente)}" 
+                                             oncomplete="PF('cliDialogEdit').hide();" update=":lstCliente:singleCli :idMSGglobal"/> 
+                            <p:commandButton value="CANCELAR" onclick="PF('cliDialogEdit').hide();"/>
+                        </p:panelGrid>
+
+                    </h:form>
+
+                </p:dialog>
+
+                <p:dialog id="idSearch" header="INFO - CLIENTE" widgetVar="cliDialogInfo" modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+                          draggable="false">
+                    <h:form id="formSearch">
+                        <p:panelGrid id="pnlSearch" columns="2">
+                            <h:outputText value="CÓDIGO"/>
+                            <p:outputLabel value="#{controlerCliente.selectCliente.codigo}"/>
+
+                            <h:outputText value="CPF"/>
+                            <p:outputLabel value="#{controlerCliente.selectCliente.cpf}"/>
+
+                            <h:outputText value="EMAIL"/>
+                            <p:outputLabel value="#{controlerCliente.selectCliente.email}"/>
+
+                            <h:outputText value="NOME"/>
+                            <p:outputLabel value="#{controlerCliente.selectCliente.nome}"/>
+
+                            <h:outputText value="DATA-CADASTRO"/>
+                            <p:outputLabel value="#{controlerCliente.selectCliente.dataAbertura}"/>
+
+                            <h:outputText value="RUA"/>
+                            <p:outputLabel value="#{controlerCliente.selectCliente.endereco.rua}"/>
+
+                            <h:outputText value="BAIRRO"/>
+                            <p:outputLabel value="#{controlerCliente.selectCliente.endereco.cep}"/>
+
+                            <h:outputText value="CIDADE"/>
+                            <p:outputLabel value="#{controlerCliente.selectCliente.endereco.cidade}"/>
+                        </p:panelGrid>
+                    </h:form>
+                </p:dialog>
+
+            </ui:define>
+
+
+        </ui:composition>
+
+    </body>
+</html>

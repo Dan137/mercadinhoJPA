@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+        <ui:composition template="./../templates/template.xhtml">
+
+            <ui:define name="top">
+                <h1>
+                    MARKET_CONNECT
+                </h1>
+            </ui:define>
+            <ui:define name="content">
+                <p:fieldset legend="LOGIN">
+                    <h:form>
+                        <p:panelGrid columns="2">
+
+                            <h:outputLabel for="idUsuario" value="USUARIO: "/>
+                            <p:inputText id="idUsuario" value="#{usuarioBean.usuario.user}"/>
+
+                            <h:outputLabel for="idSenha" value="SENHA: "/>
+                            <p:inputText id="idSenha" value="#{usuarioBean.usuario.senha}"/>
+                        </p:panelGrid>
+
+                        <h:commandButton value="entrar" action="#{usuarioBean.logar(usuarioBean.usuario.senha, usuarioBean.usuario.user)}"/>
+                    </h:form>
+                </p:fieldset>
+            </ui:define>
+
+            <ui:define name="right">
+                <p:commandButton value="CADASTRAR-SE" type="button" onclick="PF('dlg1').show();" update=":formUser:panCad" />
+
+                <p:dialog header="FORMULÁRIO CADASTRO" widgetVar="dlg1" minHeight="40">
+                    <h:form id="formUser">
+                        <p:panelGrid id="panCad" columns="2">
+                            <h:outputLabel for='idLogin' value="USUARIO: "/>
+                            <p:inputText id="idLogin" value="#{usuarioBean.usuario.user}" required="true" requiredMessage="campo Usuario: obrigatório" />
+
+                            <h:outputLabel for='idPassword' value="SENHA: "/>
+                            <p:inputText id='idPassword' value="#{usuarioBean.usuario.senha}" required="true" requiredMessage="campo Senha: Obrigatório"/>
+                            
+                            <h:outputLabel for='idEmail' value="Email: "/>
+                            <p:inputText id='idEmail' value="#{usuarioBean.usuario.email}" required="true" requiredMessage="campo email Obrigatório"/>
+                        </p:panelGrid>
+                        <p:commandButton value="cadastrar" action="#{usuarioBean.cadUsuario(usuarioBean.usuario)}" oncomplete="PF('dlg1').hide();" update=":formUser:panCad :idMSGglobal"/>
+                    </h:form>
+                </p:dialog>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
