@@ -61,14 +61,10 @@ public class ClienteModel {
         Cliente cli = findForCpf(cliente.getCpf());
 
         if (cliente == null) {
-            throw new Erros("preencha ao menos um campo");
+            throw new Erros("preencha os campos ");
 
         } else if (cliente.quals(cli)) {
             throw new Erros("nenhum valor alterado");
-
-        } else if (cli.getCpf() != null) {
-            throw new Erros("cliente já existe");
-
         } else {
             ClienteDaoImpl.getInstance().alterar(cliente);
 
@@ -105,13 +101,9 @@ public class ClienteModel {
     }
 
     public Cliente findForCpf(String cpf) throws Erros {
-        List<Cliente> lista = findAllClientesModel();
-        for (Cliente c : lista) {
-            if (c.getCpf().equals(cpf)) {
-                return ClienteDaoImpl.getInstance().recuperarPorCPF(cpf);
-            }
-        }
-        throw new Erros("nenhum cliente para o cpf informado");
+
+        return ClienteDaoImpl.getInstance().recuperarPorCPF(cpf);
+
     }
 
 }

@@ -55,11 +55,17 @@ public class ControlerUsuario implements Serializable {
     }
 
     public String logar(String senha, String user) {
-        Usuario us = this.usuarioM.logar(senha, user);
-        if (us == null) {
-
-            return "/index.xhtml";
+        Usuario us;
+        try {
+            us = this.usuarioM.logar(senha, user);
+            if (us != null) {
+                Messages.getInstance().adicionarMensagem(FacesMessage.SEVERITY_INFO, "seja bem vindo" + user, null);
+               return "/templates/template.xhtml";
+            }
+        } catch (Erros ex) {
+            Messages.getInstance().adicionarMensagem(FacesMessage.SEVERITY_ERROR, ex.getMessage(), null);
         }
-        return "/templates/template.xhtml";
+
+        return "pages2/loginFacelets.xhtml";
     }
 }

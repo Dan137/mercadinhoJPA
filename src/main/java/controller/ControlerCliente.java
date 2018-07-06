@@ -8,14 +8,10 @@ package controller;
 import Util.Erros;
 import Util.Messages;
 import java.io.Serializable;
-
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 
 import model.ClienteModel;
 import model.entidade.Cliente;
@@ -38,6 +34,7 @@ public class ControlerCliente implements Serializable {
         this.endereco = new Endereco();
         this.cliente = new Cliente();
         this.selectCliente = new Cliente();
+        this.cliente.setEndereco(this.endereco);
 
     }
 
@@ -69,7 +66,7 @@ public class ControlerCliente implements Serializable {
     public void cadCliente(Cliente cli) {
         
         try {
-            cli.setEndereco(this.endereco);
+            
             ClienteModel.getInstanceCliModel().cadClienteModel(cli);
 //            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO, "Cliente cadastrado com sucesso", "Cliente cadastrado com sucesso"));
             Messages.getInstance().adicionarMensagem(FacesMessage.SEVERITY_INFO, "Cliente Salvo com sucesso", null  );

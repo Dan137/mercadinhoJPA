@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../templates/template.xhtml">
+
+            <ui:insert name="top">
+                <ui:include src="/includes/menu.xhtml"/>
+            </ui:insert>
+
+            <ui:define name="content">
+                <h:form id="formFunc">
+                    <p:separator/>
+
+                    <p:panelGrid id="pangrid" columns="2"  >
+
+                        <h:outputLabel for='idNome' value="NOME: "/>
+                        <p:inputText  id="idNome" value="#{controlerFuncionario.funcionario.nome}" />
+
+                        <h:outputLabel for='idEmail' value="E-MAIL: "/>
+                        <p:inputText  id="idEmail" size="25" value="#{controlerFuncionario.funcionario.email}"/>
+
+
+                        <h:outputLabel for='idTelefone' value="TELEFONE: "/>
+                        <p:inputMask id="idTelefone" value="#{controlerFuncionario.funcionario.telefone}" mask="(99) 99999-9999"/> 
+
+                        <p:outputLabel for="idData" value="DATA: "/>
+                        <p:inputMask mask="99/99/9999" id="idData" value="#{controlerFuncionario.funcionario.dataAdmissao}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3"/>
+                        </p:inputMask>
+
+                        <h:outputLabel for='idRua' value="RUA" />
+                        <p:inputText  id="idRua" value="#{controlerFuncionario.funcionario.endereco.rua}" />
+
+                        <h:outputLabel for='idBairro' value="BAIRRO" />
+                        <p:inputText id="idBairro" value="#{controlerFuncionario.funcionario.endereco.bairro}" />
+
+                        <h:outputLabel for='idNumero' value="NUMERO"/>
+                        <p:inputText id="idNumero" size="10" value="#{controlerFuncionario.funcionario.endereco.numero}" />
+
+                        <h:outputLabel for='idCidade' value="CIDADE"/>
+                        <p:inputText id="idCidade" value="#{controlerFuncionario.funcionario.endereco.cidade}" />
+
+                        <h:outputLabel for='idCEP' value="CEP"/>
+                        <p:inputMask id="idCEP" mask="99999-999" value="#{controlerFuncionario.funcionario.endereco.cep}" />
+
+                    </p:panelGrid>
+
+                    <p:commandButton value="CADASTRAR" action="#{controlerFuncionario.cadFuncionario(controlerFuncionario.funcionario)}"  update=":formFunc:pangrid :idMSGglobal"/>
+
+
+                </h:form>
+
+            </ui:define>
+
+            <ui:define name="bottom">
+                bottom
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

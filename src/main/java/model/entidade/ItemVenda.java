@@ -50,7 +50,7 @@ public class ItemVenda implements Serializable {
 
     public ItemVenda(Integer idItem, int quantidade, Produto produto, Venda codvend) {
         this.idItem = idItem;
-        this.quantidade = quantidade;
+        this.quantidade = 1;
         this.produto = produto;
         this.codvend = codvend;
     }

@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../templates/template.xhtml">
+
+            <ui:define name="top">
+                top
+            </ui:define>
+
+
+            <ui:define name="content">
+                  <h:form id="idProduto">
+
+                      <p:dataTable id="idTabelaProd" var="produto" value="#{controlerProduto.listarProdutos()}" rows="10"
+                                 rowKey="#{produto.codigo}" selection="#{controlerProduto.selectProduto}" selectionMode="single" paginator="true">
+
+                         <f:facet name="header">
+                            LISTA DE PRODUTOS CADASTRADOS
+                        </f:facet>
+                        
+                        <p:column headerText="codigo">
+                            <h:outputText value="#{produto.codigo}"/>
+                        </p:column>
+
+                        <p:column headerText="Nome">
+                            <h:outputText value="#{produto.nome}"/>
+                        </p:column>
+
+                        <p:column headerText="preco">
+                            <h:outputText value="#{produto.preco}"/>
+                        </p:column>
+
+                        <p:column headerText="Quantidade">
+                            <h:outputText value="#{produto.quantidade}"/>
+                        </p:column>
+
+
+                        <p:column headerText="Tipo">
+                            <h:outputText value="#{produto.tipo}"/>
+                        </p:column>
+
+                        <p:column headerText="Marca">
+                            <h:outputText value="#{produto.marca}"/>
+                        </p:column>
+
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="EXCLUIR"/>
+                            </f:facet>
+
+                            <p:commandButton value="EXCLUIR" action="#{controlerProduto.excluir(controlerProduto.selectProduto)}">
+                                <f:setPropertyActionListener value="#{produto}" target="#{controlerProduto.selectProduto}"/>
+                            </p:commandButton>
+                        </p:column>
+
+                        <p:column headerText="OPÇÕES" width="80">
+                            <p:commandButton icon="ui-icon-trash"  oncomplete="PF('cliDialogRem').show();" update=":idProduto"/> 
+                            <p:commandButton icon="ui-icon-pencil" oncomplete="PF('cliDialogEdit').show();" update=":formEdit:pnlEditar "/>
+                            <p:commandButton icon="ui-icon-search" oncomplete="PF('cliDialogInfo').show();" update=":formSearch:pnlSearch  "/>
+                        </p:column>
+
+
+                    </p:dataTable>
+
+                </h:form>
+
+                <p:dialog id="excProduto"  header="DELETAR PRODUTO " widgetVar="cliDialogRem" modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+                          draggable="false" >
+
+                    <h:form id="formRem">
+                        <p:panelGrid id="panelProd" columns="2"  >
+                            <h:outputText value="CÓDIGO"/>
+                            <p:outputLabel value="#{controlerProduto.selectProduto.codigo}"/>
+
+                            <h:outputText value="NOME"/>
+                            <p:outputLabel value="#{controlerProduto.selectProduto.nome}"/>
+
+                            <h:outputText value="PREÇO"/>
+                            <p:outputLabel value="#{controlerProduto.selectProduto.preco}"/>
+
+                            <h:outputText value="QUANTIDADE"/>
+                            <p:outputLabel value="#{controlerProduto.selectProduto.quantidade}"/>
+
+                            <h:outputText value="TIPO"/>
+                            <p:outputLabel value="#{controlerProduto.selectProduto.tipo}"/>
+
+                            <h:outputText value="MARCA"/>
+                            <p:outputLabel value="#{controlerProduto.selectProduto.marca}"/>
+
+                        </p:panelGrid>
+                        <h:panelGrid columns="2">
+                            <p:commandButton value="excluir" actionListener ="#{controlerProduto.excluir(controleProduto.selectProduto)}"/>
+
+                        </h:panelGrid>
+
+                    </h:form>
+                </p:dialog>
+
+                <p:dialog id="editProduto" header="EDITAR CLIENTE"  widgetVar="cliDialogEdit" modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+                          draggable="false" >
+                    <h:form id="formEdit">
+                        <p:panelGrid id="pnlEditar" columns="2"></p:panelGrid>
+
+                        <h:outputLabel for = "idNome" value="NOME"/>
+                        <p:inputText id="idNome" value="#{controlerProduto.produto.nome}"/>
+
+                        <h:outputLabel for= "idPreco" value="PREÇO"/>
+                        <p:inputText id="idPreco" value="#{controlerProduto.produto.preco}"/>
+
+                        <h:outputLabel for ="idQuantidade" value="QUANTIDADE"/>
+                        <p:inputText id="idQuantidade" value="#{controlerProduto.produto.quantidade}"/>
+
+                        <h:outputLabel for="idTipo" value="TIPO"/>
+                        <p:selectOneMenu id="idTipo" value="#{selectOneMenu.Tipo}" >
+                            <f:selectItem itemLabel="Selecione o tipo" />
+                            <f:selectItem itemLabel="Açougue" itemValue="Açougue"/>
+                            <f:selectItem itemLabel="Adega" itemValue="Adega"/>
+                            <f:selectItem itemLabel="Bebidas" itemValue="Bebidas"/>
+                            <f:selectItem itemLabel="Cereais" itemValue="Cereais"/>
+                            <f:selectItem itemLabel="Churrascaria" itemValue="Churrascaria"/>
+                            <f:selectItem itemLabel="Congelados" itemValue="Congelados"/>
+                            <f:selectItem itemLabel="Doces e Chocolates" itemValue="Doces e Chocolates" />
+                            <f:selectItem itemLabel="Hortifrutis" itemValue="Hortifrutis"/>
+                            <f:selectItem itemLabel="Laticínios" itemValue="Laticínios"/>
+                            <f:selectItem itemLabel="Latarias e Conservas" itemValue="Latarias e Conservas"/>
+                            <f:selectItem itemLabel="Massas" itemValue="Massas"/>
+                            <f:selectItem itemLabel="Outros" itemValue="Outros"/>
+                            <f:selectItem itemLabel="Perfumaria" itemValue="Perfumaria"/>
+                        </p:selectOneMenu>
+
+
+                        <h:outputLabel for="idMarca" value="MARCA"/>
+                        <p:selectOneMenu id="idMarca" value="#{selectOneMenuView.Marca}" >
+                            <f:selectItem itemLabel="Selecione a marca" itemValue="" />
+                            <f:selectItem itemLabel="Nestlé" itemValue="Nestlé"/>
+                            <f:selectItem itemLabel="Vitarela" itemValue="Vitarela"/>
+                            <f:selectItem itemLabel="Brilux" itemValue="Brilux"/>
+                            <f:selectItem itemLabel="" itemValue=""/>
+                            <f:selectItem itemLabel="Pilar" itemValue="Pilar"/>
+                        </p:selectOneMenu>
+
+                    </h:form>
+
+                </p:dialog>
+                
+                <p:panelGrid columns="2">
+                    <p:commandButton value="SALVAR" actionListener="#{controlerProduto.selectProduto.alterar(controlerProduto.selectProduto)}" 
+                                             oncomplete="PF('cliDialogEdit').hide();"/> 
+                            <p:commandButton value="CANCELAR" onclick="PF('cliDialogEdit').hide();"/>
+                    
+                </p:panelGrid>
+
+            </ui:define>
+
+            
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../templates/template.xhtml">
+
+            <ui:insert name="top">
+                <ui:include src="/includes/menu.xhtml"/>
+            </ui:insert>
+
+            <ui:define name="content">
+                <p:fieldset>
+                    <h:form id="formPro">
+                        <p:panelGrid columns="2">
+                            <h:outputLabel for = "idNome" value="NOME"/>
+                            <p:inputText id="idNome" value="#{controlerProduto.produto.nome}"/>
+
+                            <h:outputLabel for= "idPreco" value="PREÇO"/>
+                            <p:inputText id="idPreco" value="#{controlerProduto.produto.preco}"/>
+
+                            <h:outputLabel for ="idQuantidade" value="QUANTIDADE"/>
+                            <p:inputText id="idQuantidade" value="#{controlerProduto.produto.quantidade}"/>
+
+                            <h:outputLabel for="idTipo" value="TIPO"/>
+                            <p:selectOneMenu id="idTipo" value="#{controlerProduto.produto.tipo}" >
+                                <f:selectItem itemLabel="Selecione o tipo" />
+                                <f:selectItem itemLabel="Açougue" itemValue="Açougue"/>
+                                <f:selectItem itemLabel="Adega" itemValue="Adega"/>
+                                <f:selectItem itemLabel="Bebidas" itemValue="Bebidas"/>
+                                <f:selectItem itemLabel="Cereais" itemValue="Cereais"/>
+                                <f:selectItem itemLabel="Churrascaria" itemValue="Churrascaria"/>
+                                <f:selectItem itemLabel="Congelados" itemValue="Congelados"/>
+                                <f:selectItem itemLabel="Doces e Chocolates" itemValue="Doces e Chocolates" />
+                                <f:selectItem itemLabel="Hortifrutis" itemValue="Hortifrutis"/>
+                                <f:selectItem itemLabel="Laticínios" itemValue="Laticínios"/>
+                                <f:selectItem itemLabel="Latarias e Conservas" itemValue="Latarias e Conservas"/>
+                                <f:selectItem itemLabel="Massas" itemValue="Massas"/>
+                                <f:selectItem itemLabel="Outros" itemValue="Outros"/>
+                                <f:selectItem itemLabel="Perfumaria" itemValue="Perfumaria"/>
+                            </p:selectOneMenu>
+
+
+                            <h:outputLabel for="idMarca" value="MARCA"/>
+                            <p:selectOneMenu id="idMarca" value="#{controlerProduto.produto.marca}" >
+                                <f:selectItem itemLabel="Selecione a marca" itemValue="" />
+                                <f:selectItem itemLabel="Nestlé" itemValue="Nestlé"/>
+                                <f:selectItem itemLabel="Vitarela" itemValue="Vitarela"/>
+                                <f:selectItem itemLabel="Brilux" itemValue="Brilux"/>
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItem itemLabel="Pilar" itemValue="Pilar"/>
+                            </p:selectOneMenu>
+
+                        </p:panelGrid>
+                        <p:commandButton value="CADASTRAR" action="#{controlerProduto.inserir(controlerProduto.produto)}" update=":formPro"/>
+
+                    </h:form>
+                </p:fieldset>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -27,9 +27,9 @@ public class TesteFuncionario {
         ControlerFuncionario cf = new ControlerFuncionario();
 
 //        ===================CADASTRO DE FUNCIONARIO===================
-//        Endereco e = new Endereco("capitão pedro rodrigues", 112, "brasilia", "5535656", "Paranatama");
-//        Funcionario f = new Funcionario(null, "Daniel", "daniel.verissimo123dnl@gmail.com", "(87) 9.81355794", dataAdmissao, e);
-//        cf.cadFuncionario(f);
+        Endereco e = new Endereco("capitão pedro rodrigues", 112, "brasilia", "5535656", "Paranatama");
+        Funcionario f = new Funcionario(null, "Daniel", "daniel.verissimo123dnl@gmail.com", "(87) 9.81355794", dataAdmissao, e);
+        cf.cadFuncionario(f);
 //        ===================ATUALIZAÇÃO DE FUNCIONARIO===================
 //          Endereco e = new Endereco("Rua", 113, "centro", "2121454", "sao joao");
 //          Funcionario f = new Funcionario(54, "Maycon", "mayconkdfkd@gkdd", "2454254545", dataAdmissao, e);

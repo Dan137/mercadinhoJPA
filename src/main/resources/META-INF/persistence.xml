@@ -9,6 +9,7 @@
     <class>model.entidade.ItemVenda</class>
     <class>model.entidade.Venda</class>
     <class>model.entidade.Usuario</class>
+    <class>model.entidade.Endereco</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/mercadinho"/>

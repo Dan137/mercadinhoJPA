@@ -14,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 /**
@@ -41,10 +43,10 @@ public class Funcionario implements Serializable {
     @Column(name = "telefone", nullable = false)
     private String telefone;
 
+    @Temporal(TemporalType.DATE)
     private Date dataAdmissao;
 
     @Embedded
-    @Column(nullable = false)
     private Endereco endereco;
 
     public Funcionario() {

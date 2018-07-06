@@ -8,17 +8,27 @@
 
     <h:form>
         <p:menubar>
-            <p:submenu label="cliente">
+            <p:submenu label="CLIENTE">
                 <p:menuitem  >
-                    <h:commandLink  value="cadastrar" action="/pages/cadCliente.xhtml"/>
+                    <h:commandLink  value="CADASTRAR" action="/pages/cadCliente.xhtml"/>
                 </p:menuitem>
                 
                 <p:menuitem >
-                    <h:commandLink value="listar" action="/pages/listaClientes"/>
+                    <h:commandLink value="LISTAR" action="/pages/listaClientes"/>
             </p:menuitem>
         </p:submenu>
 
-        <p:submenu label="produto"></p:submenu>
+            <p:submenu label="VENDA">
+                 <p:menuitem  >
+                    <h:commandLink  value="INSERIR ITEM" action="/pages/cadItemVenda.xhtml"/>
+                </p:menuitem>
+            </p:submenu>
+            
+            <p:submenu label="PRODUTO">
+                 <p:menuitem  >
+                    <h:commandLink  value="PRODUTO" action="/pages/cadProduto.xhtml"/>
+                </p:menuitem>
+            </p:submenu>
     </p:menubar>
 </h:form>
 </ui:composition>

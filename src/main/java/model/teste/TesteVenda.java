@@ -58,7 +58,7 @@ public class TesteVenda {
 //                    adiciona um item à lista
                     lstItens.add(iv);
 //                    cadastra um item no banco
-                    cv.cadItemVenda(iv);
+//                    cv.cadItemVenda(iv);
                     break;
                 case 2:
 //                    seta a lista de itens na classe ItemVenda

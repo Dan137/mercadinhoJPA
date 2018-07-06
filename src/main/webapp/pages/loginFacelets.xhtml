@@ -15,17 +15,17 @@
             </ui:define>
             <ui:define name="content">
                 <p:fieldset legend="LOGIN">
-                    <h:form>
-                        <p:panelGrid columns="2">
+                    <h:form id="formLogin">
+                        <p:panelGrid id="pngLogin" columns="2">
 
                             <h:outputLabel for="idUsuario" value="USUARIO: "/>
                             <p:inputText id="idUsuario" value="#{usuarioBean.usuario.user}"/>
 
                             <h:outputLabel for="idSenha" value="SENHA: "/>
-                            <p:inputText id="idSenha" value="#{usuarioBean.usuario.senha}"/>
+                            <h:inputSecret id="idSenha" value="#{usuarioBean.usuario.senha}"/>
                         </p:panelGrid>
 
-                        <h:commandButton value="entrar" action="#{usuarioBean.logar(usuarioBean.usuario.senha, usuarioBean.usuario.user)}"/>
+                        <p:commandButton value="entrar" action="#{usuarioBean.logar(usuarioBean.usuario.senha, usuarioBean.usuario.user)}" update=":formLogin :idMSGglobal"/>
                     </h:form>
                 </p:fieldset>
             </ui:define>

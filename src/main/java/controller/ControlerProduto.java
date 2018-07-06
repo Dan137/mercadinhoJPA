@@ -7,19 +7,22 @@ package controller;
 
 import Util.Erros;
 import Util.Messages;
+import java.io.Serializable;
 import model.ProdutoModel;
 import model.entidade.Produto;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 /**
  *
  * @author Daniel
  */
 @ManagedBean
-public class ControlerProduto {
+@SessionScoped
+public class ControlerProduto implements Serializable{
     private Produto produto;
     private ProdutoModel produtomodel;
     private Produto selectProduto = new Produto();

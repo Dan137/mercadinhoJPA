@@ -7,24 +7,35 @@ package controller;
 
 import Util.Erros;
 import Util.Messages;
+import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import model.FuncionarioModel;
+import model.entidade.Endereco;
 import model.entidade.Funcionario;
 
 /**
  *
  * @author Daniel
  */
-public class ControlerFuncionario {
+@ManagedBean
+@SessionScoped
+public class ControlerFuncionario implements Serializable{
 
+    private static final long serialVersionUID = 1L;
     private Funcionario funcionario;
     private FuncionarioModel fm;
+    private Endereco endereco;
 
     public ControlerFuncionario() {
+        this.endereco=new Endereco();
         this.funcionario = new Funcionario();
         this.fm = new FuncionarioModel();
+        this.funcionario.setEndereco(this.endereco);
+        
     }
 
     public Funcionario getFuncionario() {
@@ -35,9 +46,19 @@ public class ControlerFuncionario {
         this.funcionario = funcionario;
     }
 
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+    
+
 //    ============CRUD DO FUNCIONARIO==================
     public void cadFuncionario(Funcionario f) {
         try {
+            
             this.fm.cadFuncionarioModel(f);
         } catch (Erros ex) {
             Logger.getLogger(ControlerFuncionario.class.getName()).log(Level.SEVERE, null, ex);
