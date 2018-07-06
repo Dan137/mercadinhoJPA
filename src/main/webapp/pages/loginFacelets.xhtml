@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
         <ui:composition template="./../templates/template.xhtml">
@@ -32,6 +33,7 @@
 
             <ui:define name="right">
                 <p:commandButton value="CADASTRAR-SE" type="button" onclick="PF('dlg1').show();" update=":formUser:panCad" />
+                <!--<p:commandButton value="ALTERAR CADASTRO" type="button" onclick="PF('altUsuario').show();" update=":formAltUser:selecUser" />-->
 
                 <p:dialog header="FORMULÁRIO CADASTRO" widgetVar="dlg1" minHeight="40">
                     <h:form id="formUser">
@@ -41,13 +43,37 @@
 
                             <h:outputLabel for='idPassword' value="SENHA: "/>
                             <p:inputText id='idPassword' value="#{usuarioBean.usuario.senha}" required="true" requiredMessage="campo Senha: Obrigatório"/>
-                            
+
                             <h:outputLabel for='idEmail' value="Email: "/>
                             <p:inputText id='idEmail' value="#{usuarioBean.usuario.email}" required="true" requiredMessage="campo email Obrigatório"/>
                         </p:panelGrid>
                         <p:commandButton value="cadastrar" action="#{usuarioBean.cadUsuario(usuarioBean.usuario)}" oncomplete="PF('dlg1').hide();" update=":formUser:panCad :idMSGglobal"/>
                     </h:form>
                 </p:dialog>
+
+<!--                <p:dialog id="idDialgAltUser" header="alterar usuario ou senha" widgetVar="altUsuario">
+                    <h:form id="formAltUser">
+                        <p:dataTable id="selecUser" var="usuar" value="#{usuarioBean.listTodosUser()}"  rowKey="#{usuar.id_usuario}"
+                                     selection="#{usuarioBean.usuario}" selectionMode="single" paginator="true" >
+                            <f:facet name="header">
+                                USUARIO CADASTRADO
+                            </f:facet>
+
+                            <p:column headerText="CODIGO: " >
+                                <h:outputLabel value="#{usuar.user}"/>
+                            </p:column>
+                            <p:column headerText="NOME: ">
+                                
+                            </p:column>
+                            <p:column headerText="OPCÕES">
+                                <h:form>
+                                    <p:commandButton value="alterar"
+                                </h:form>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+
+                </p:dialog>-->
 
             </ui:define>
 

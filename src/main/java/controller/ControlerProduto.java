@@ -13,6 +13,7 @@ import model.entidade.Produto;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -22,15 +23,16 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean
 @SessionScoped
-public class ControlerProduto implements Serializable{
+public class ControlerProduto implements Serializable {
+
     private Produto produto;
     private ProdutoModel produtomodel;
     private Produto selectProduto = new Produto();
 
     public ControlerProduto() {
-        this.produto= new Produto();
+        this.produto = new Produto();
         this.produtomodel = new ProdutoModel();
-        this.selectProduto=selectProduto;
+        this.selectProduto = selectProduto;
     }
 
     public Produto getProduto() {
@@ -47,26 +49,33 @@ public class ControlerProduto implements Serializable{
 
     public void setSelectProduto(Produto selectProduto) {
         this.selectProduto = selectProduto;
-    }    
-    
-    public void inserir(Produto produto) {
-        produtomodel.cadProdModel(produto);
+    }
 
+    public void inserir(Produto produto) {
+        try {
+           
+            produtomodel.cadProdModel(produto);
+            Messages.getInstance().adicionarMensagem(FacesMessage.SEVERITY_INFO, "Produto cadastrado com sucesso", null);
+        } catch (Erros ex) {
+            Messages.getInstance().adicionarMensagem(FacesMessage.SEVERITY_ERROR, ex.getMessage(), null);
+        }
     }
 
     public void alterar(Produto produto) {
         try {
             this.produtomodel.atualizarProduto(produto);
+            Messages.getInstance().adicionarMensagem(FacesMessage.SEVERITY_INFO, "Produto atualizado com sucesso", null);
         } catch (Erros ex) {
-            Logger.getLogger(ControlerProduto.class.getName()).log(Level.SEVERE, null, ex);
+            Messages.getInstance().adicionarMensagem(FacesMessage.SEVERITY_ERROR, ex.getMessage(), null);
         }
     }
 
     public void excluir(Produto produto) {
         try {
             this.produtomodel.removerProduto(produto);
+            Messages.getInstance().adicionarMensagem(FacesMessage.SEVERITY_INFO, "Produto excluido com sucesso", null);
         } catch (Erros ex) {
-            Logger.getLogger(ControlerProduto.class.getName()).log(Level.SEVERE, null, ex);
+           Messages.getInstance().adicionarMensagem(FacesMessage.SEVERITY_ERROR, ex.getMessage(), null);
         }
     }
 
@@ -77,5 +86,5 @@ public class ControlerProduto implements Serializable{
     public List<Produto> listarProdutos() {
         return this.produtomodel.listarProdutos();
     }
-        
+
 }

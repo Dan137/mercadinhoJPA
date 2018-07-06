@@ -8,6 +8,7 @@ package controller;
 import Util.Erros;
 import Util.Messages;
 import java.io.Serializable;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
@@ -26,8 +27,8 @@ import model.entidade.Usuario;
 public class ControlerUsuario implements Serializable {
 
     private Usuario usuario;
-    private transient UsuarioModel usuarioM;
-
+    private UsuarioModel usuarioM;
+   
     public ControlerUsuario() {
         this.usuario = new Usuario();
         this.usuarioM = new UsuarioModel();
@@ -53,6 +54,10 @@ public class ControlerUsuario implements Serializable {
     public Usuario findUsuario(Integer codigo) {
         return this.usuarioM.findUsuario(codigo);
     }
+    
+    public List <Usuario> listTodosUser(){
+        return this.usuarioM.listarTodosUsersModel();
+    }
 
     public String logar(String senha, String user) {
         Usuario us;
@@ -66,6 +71,6 @@ public class ControlerUsuario implements Serializable {
             Messages.getInstance().adicionarMensagem(FacesMessage.SEVERITY_ERROR, ex.getMessage(), null);
         }
 
-        return "pages2/loginFacelets.xhtml";
+        return "pages/loginFacelets.xhtml";
     }
 }

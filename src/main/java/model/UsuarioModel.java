@@ -42,7 +42,9 @@ public class UsuarioModel {
         return UsuarioDaoImpl.getInstance().recuperar(codigo);
 
     }
-
+public List<Usuario> listarTodosUsersModel(){
+    return UsuarioDaoImpl.getInstance().recuperarTodos();
+}
     public Usuario logar(String senha, String user) throws Erros {
         Usuario us = new Usuario();
         us.setSenha(Criptografia.criptografar(senha));

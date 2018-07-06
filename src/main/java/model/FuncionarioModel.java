@@ -6,11 +6,7 @@
 package model;
 
 import Util.Erros;
-import Util.Messages;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import model.DAO.FuncionarioDao;
 import model.entidade.Funcionario;
@@ -22,7 +18,7 @@ import model.entidade.Funcionario;
 public class FuncionarioModel {
 
     public void cadFuncionarioModel(Funcionario funcionario) throws Erros {
-
+        
         FuncionarioDao.getInstance().inserir(funcionario);
 
     }
