@@ -31,10 +31,10 @@ public class TesteCliente {
 //        cc.cadCliente(c);
 //        ===================== ALTERAR CLIENTE =========================
 //        Endereco e = new Endereco("Rua manoel rodrigues", 12, "centro", "Sao joão", "0000000");
-//        Cliente c = new Cliente(186, "maycon", dataAbertura, "54545545", "maycon@may", "(87)9.8135-5794", e);
+//        Cliente c = new Cliente(18, "maycon", dataAbertura, "54545545", "maycon@may", "(87)9.8135-5794", e);
 //        cc.updateCliente(c);
 //        ===================== RETORNA UM CLIENTE ==========================
-//        Cliente c = cc.obterCliente(119);
+//        Cliente c = cc.obterCliente(18);
 //        System.out.println(c.toString());
 //        ===================== RETORNA TODOS OS CLIENTES====================
 //          List <Cliente> clientes = cc.obterClientes();
@@ -53,8 +53,8 @@ public class TesteCliente {
 //        cc.deletarCliente(c);
 
 //==========================BUSCA PELO CPF ============================
-    Cliente c;
-   c= cc.findForCpf("");
-        System.out.println(c.toString());
+//    Cliente c;
+//   c= cc.findForCpf("");
+//        System.out.println(c.toString());
     }
 }

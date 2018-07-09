@@ -31,12 +31,13 @@ public class ControlerVenda implements Serializable {
     private ItemVenda itemVenda;
     private VendaModel vm;
     private ItemVendaModel ivm;
-
+   
     public ControlerVenda() {
         this.venda = new Venda();
         this.itemVenda = new ItemVenda();
         this.ivm = new ItemVendaModel();
         this.vm = new VendaModel();
+       
     }
 
     public Venda getVenda() {
@@ -55,14 +56,17 @@ public class ControlerVenda implements Serializable {
         this.itemVenda = itemVenda;
     }
 
+   
+    
+
 //    ======================= NO QUE SE REFERE A ITEM VENDA ====================
     public void cadItemVenda(Integer codigo) {
         try {
             ControlerProduto cv = new ControlerProduto();
-            Produto prod = new Produto();
-            prod = cv.findId(codigo);
+            
+           Produto produto = cv.findId(codigo);
 
-            ItemVenda iv = new ItemVenda(0, 1, prod, null);
+            ItemVenda iv = new ItemVenda(0, 1, produto, null);
             this.ivm.persistItem(iv);
         } catch (Erros ex) {
             Logger.getLogger(ControlerVenda.class.getName()).log(Level.SEVERE, null, ex);

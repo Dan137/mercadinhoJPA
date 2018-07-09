@@ -6,12 +6,7 @@
 package model;
 
 import Util.Erros;
-import Util.Messages;
-import controller.ControlerVenda;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.DAO.ItemVendaDao;
 import model.entidade.ItemVenda;
 import model.entidade.Venda;
@@ -38,6 +33,7 @@ public class ItemVendaModel {
 
 //    ============= CADASTRO DE ITENS =================
     public void persistItem(ItemVenda itemVenda) throws Erros {
+        
             ItemVendaDao.getInstance().inserir(itemVenda);
         
            

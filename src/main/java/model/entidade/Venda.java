@@ -29,28 +29,30 @@ public class Venda implements Serializable {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    @Column(name = "idvenda")
+    @Column(name = "idvenda", nullable = false)
     private Integer codVenda;
     
-    @Column(name = "datavenda")
+    @Column(name = "datavenda", nullable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataVenda;
 
-    @Column(name = "prazopagamento")
+    @Column(name = "prazopagamento", nullable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataPagamento;
 
-    @Column (name="valortot")
+    @Column (name="valortot", nullable = false)
     private double valorTot;
     
-    @Column(name = "formpag")
+    @Column(name = "formpag", nullable = false)
     private String formapagamento;
    
     @Transient
     private List<ItemVenda> itemvenda;
     
     @ManyToOne
-    @JoinColumn(name = "cliente_id")
+    
+    @JoinColumn(name = "cliente_id"
+    )
     private Cliente cliente_id;
 
     public Venda() {

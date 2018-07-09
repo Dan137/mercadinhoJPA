@@ -64,8 +64,8 @@
                         <p:column headerText="OPÇÕES" width="80">
                             
                                 <p:commandButton icon="ui-icon-trash"  oncomplete="PF('prodDialExcluir').show();" update=""/> 
-                                <p:commandButton icon="ui-icon-pencil"  oncomplete="PF('prodDialEditProd').show();" update=":formEditProd:panelEditProd"/> 
-                            
+                                <p:commandButton icon="ui-icon-pencil"  oncomplete="PF('prodDialEditProd').show();" /> 
+                           
                         </p:column>
                     </p:dataTable>
 
@@ -73,16 +73,22 @@
                 <p:dialog id="idDialExc" header="EXCLUIR-PRODUTO" widgetVar="prodDialExcluir" >
                     <form id="formRemProd">
                         <p:panelGrid id="panExc" columns="2">
-                            <h:outputText value="NOME: "/>
+                            <--utputText value="NOME: "/>
+                            
+                            
                             <p:outputLabel value="#{controlerProduto.selectProduto.nome}"/>
-                            <h:outputText value="TIPO: "/>
+                            <p:outputLabel value="TIPO: "/>
                             <p:outputLabel value="#{controlerProduto.selectProduto.tipo}"/>
-                            <h:outputText value="MARCA: "/>
+                            
+                            <p:outputLabel value="MARCA: "/>
                             <p:outputLabel value="#{controlerProduto.selectProduto.marca}"/>
+                            
                             <h:outputText value="PRECO: "/>
                             <p:outputLabel value="#{controlerProduto.selectProduto.preco}"/>
-                            <h:outputText value="QUANTIDADE: "/>
+                            
+                            <p:outputLabel value="QUANTIDADE: "/>
                             <p:outputLabel value="#{controlerProduto.selectProduto.quantidade}"/>
+                            
                             <h:outputText value="CODIGO: "/>
                             <p:outputLabel value="#{controlerProduto.selectProduto.codigo}"/>
 

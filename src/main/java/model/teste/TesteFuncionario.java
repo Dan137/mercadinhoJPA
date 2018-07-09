@@ -27,15 +27,15 @@ public class TesteFuncionario {
         ControlerFuncionario cf = new ControlerFuncionario();
 
 //        ===================CADASTRO DE FUNCIONARIO===================
-        Endereco e = new Endereco("capitão pedro rodrigues", 112, "brasilia", "5535656", "Paranatama");
-        Funcionario f = new Funcionario(null, "Daniel", "daniel.verissimo123dnl@gmail.com", "(87) 9.81355794", dataAdmissao, e);
-        cf.cadFuncionario(f);
+//        Endereco e = new Endereco("capitão pedro rodrigues", 112, "brasilia", "5535656", "Paranatama");
+//        Funcionario f = new Funcionario(null, "Wevisson", "daniel.verissimo123dnl@gmail.com", "(87) 9.81355794", dataAdmissao, e);
+//        cf.cadFuncionario(f);
 //        ===================ATUALIZAÇÃO DE FUNCIONARIO===================
 //          Endereco e = new Endereco("Rua", 113, "centro", "2121454", "sao joao");
-//          Funcionario f = new Funcionario(54, "Maycon", "mayconkdfkd@gkdd", "2454254545", dataAdmissao, e);
+//          Funcionario f = new Funcionario(20, "Maycon", "mayconkdfkd@gkdd", "2454254545", dataAdmissao, e);
 //          cf.apdtFuncionario(f);
 //        ===================LISTA PELO ID===================
-//          Funcionario f = cf.procurarForId(54);
+//          Funcionario f = cf.procurarForId(20);
 //          String str=" ";
 //          str+= f.getEmail()+"\n"
 //                  + f.getNome()+"\n"
@@ -68,8 +68,8 @@ public class TesteFuncionario {
 //        }
 //        System.out.println(str);
 //        ===================REMOVER FUNCIONARIO===================
-//        Funcionario fun = cf.procurarForId(54);
-//        cf.excluirFuncionario(fun);
+        Funcionario fun = cf.procurarForId(20);
+        cf.excluirFuncionario(fun);
 
     }
 }

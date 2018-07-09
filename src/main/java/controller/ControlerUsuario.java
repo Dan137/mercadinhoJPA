@@ -64,7 +64,7 @@ public class ControlerUsuario implements Serializable {
         try {
             us = this.usuarioM.logar(senha, user);
             if (us != null) {
-                Messages.getInstance().adicionarMensagem(FacesMessage.SEVERITY_INFO, "seja bem vindo" + user, null);
+                Messages.getInstance().adicionarMensagem(FacesMessage.SEVERITY_INFO, "seja bem vindo " + user, null);
                return "/templates/template.xhtml";
             }
         } catch (Erros ex) {
