@@ -69,7 +69,7 @@ public class ControlerCliente implements Serializable {
             
             ClienteModel.getInstanceCliModel().cadClienteModel(cli);
 //            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO, "Cliente cadastrado com sucesso", "Cliente cadastrado com sucesso"));
-//            Messages.getInstance().adicionarMensagem(FacesMessage.SEVERITY_INFO, "Cliente Salvo com sucesso", null  );
+            Messages.getInstance().adicionarMensagem(FacesMessage.SEVERITY_INFO, "Cliente Cadastrado com sucesso", null  );
         } catch (Erros ex) {
     
 //            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, ex.getMessage(), null));

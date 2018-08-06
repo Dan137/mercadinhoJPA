@@ -29,13 +29,14 @@ public class ControlerFuncionario implements Serializable{
     private Funcionario funcionario;
     private FuncionarioModel fm;
     private Endereco endereco;
-
+    private Funcionario selectFuncionario;
+    
     public ControlerFuncionario() {
         this.endereco=new Endereco();
         this.funcionario = new Funcionario();
         this.fm = new FuncionarioModel();
         this.funcionario.setEndereco(this.endereco);
-        
+        this.selectFuncionario = new Funcionario();
     }
 
     public Funcionario getFuncionario() {
@@ -53,12 +54,19 @@ public class ControlerFuncionario implements Serializable{
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
-    
 
+    public Funcionario getSelectFuncionario() {
+        return selectFuncionario;
+    }
+
+    public void setSelectFuncionario(Funcionario clienteAux) {
+        this.selectFuncionario = clienteAux;
+    }
+    
 //    ============CRUD DO FUNCIONARIO==================
     public void cadFuncionario(Funcionario f) {
         try {
-            
+          
             this.fm.cadFuncionarioModel(f);
         } catch (Erros ex) {
             Logger.getLogger(ControlerFuncionario.class.getName()).log(Level.SEVERE, null, ex);

@@ -17,6 +17,7 @@ import java.util.List;
 public class ProdutoModel {
 
     public void cadProdModel(Produto produto) throws Erros {
+        produto.setCodigo(null);
         if (produto.getNome().equals("")) {
             throw new Erros("Produto Vazio");
         } else if (produto.getQuantidade() <= 0) {

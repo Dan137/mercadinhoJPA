@@ -36,7 +36,7 @@ public class Venda implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataVenda;
 
-    @Column(name = "prazopagamento", nullable = false)
+    @Column(name = "prazopagamento")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataPagamento;
 

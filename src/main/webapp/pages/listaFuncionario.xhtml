@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../templates/template.xhtml">
+
+            <ui:insert name="top">
+                <ui:include src="/includes/menu.xhtml"/>
+            </ui:insert>
+
+            <ui:define name="content">
+                <h:form id="lstFuncionario">
+                    <p:dataTable id="singleFunc" var="funcionario" value="#{controlerFuncionario.listFuncionarios()}" rowKey="#{funcionario.id}" rows="10"
+                                 selection="#{controlerFuncionario.selectFuncionario}" selectionMode="single" paginator="true">
+                        <p:column headerText="EMAIL: ">
+                            <p:outputLabel value="#{funcionario.email}"/>
+                        </p:column>
+                        <p:column headerText="NOME: ">
+                            <p:outputLabel value="#{funcionario.nome}"/>
+                        </p:column>
+
+                        <p:column headerText="TELEFONE: ">
+                            <p:outputLabel value="#{funcionario.telefone}"/>
+                        </p:column>
+
+                        <p:column headerText="CÓDIGO: ">
+                            <p:outputLabel value="#{funcionario.id}"/>
+                        </p:column>
+
+                        <p:column headerText="CIDADE: ">
+                            <p:outputLabel value="#{funcionario.endereco.cidade}"/>
+                        </p:column>
+
+                        <p:column headerText="BAIRRO: ">
+                            <p:outputLabel value="#{funcionario.endereco.bairro}"/>
+                        </p:column>
+
+                        <p:column headerText="NÚMERO: ">
+                            <p:outputLabel value="#{funcionario.endereco.numero}"/>
+                        </p:column>
+
+                        <p:column headerText="CEP: ">
+                            <p:outputLabel value="#{funcionario.endereco.cep}"/>
+                        </p:column>
+
+                        <p:column>
+                            <p:commandButton icon="ui-icon-trash"  oncomplete="PF('dialExcFunc').show();" update=":formExcFunc:paneExcFunc"/> 
+                            <p:commandButton icon="ui-icon-pencil"  oncomplete="PF('dialEditFunc').show();" update=":formEditFunc:panelEditFunc"/> 
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+                <p:dialog id="idDialEdit" widgetVar="dialExcFunc" header="excluir funcionario" modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+                          draggable="false">
+                    <h:form id="formExcFunc">
+                        <p:panelGrid id="paneExcFunc" columns="2">
+
+                            <h:outputLabel value="NOME: "/>
+                            <p:outputLabel value="#{controlerFuncionario.selectFuncionario.nome}"/>
+
+                            <h:outputLabel value="CÓDIGO: "/>
+                            <p:outputLabel  value="#{controlerFuncionario.selectFuncionario.id}"/>
+
+                            <h:outputLabel value="E-MAIL: "/>
+                            <p:outputLabel  value="#{controlerFuncionario.selectFuncionario.email}"/>
+
+                            <h:outputLabel value="TELEFONE: "/>
+                            <p:outputLabel  value="#{controlerFuncionario.selectFuncionario.telefone}"/>
+
+                            <h:outputLabel value="DATA DE ADMISSAO: "/>
+                            <p:outputLabel  value="#{controlerFuncionario.selectFuncionario.dataAdmissao}"/>
+
+                            <h:outputLabel value="RUA: "/>
+                            <p:outputLabel  value="#{controlerFuncionario.selectFuncionario.endereco.rua}"/>
+
+                            <h:outputLabel value="CIDADE: "/>
+                            <p:outputLabel  value="#{controlerFuncionario.selectFuncionario.endereco.cidade}"/>
+
+                            <h:outputLabel value="NUMERO: "/>
+                            <p:outputLabel  value="#{controlerFuncionario.selectFuncionario.endereco.numero}"/>
+
+                            <h:outputLabel value="CEP: "/>
+                            <p:outputLabel  value="#{controlerFuncionario.selectFuncionario.endereco.cep}"/>
+
+                        </p:panelGrid>
+                        <p:panelGrid columns="2">
+                            <h:form>
+                                <p:commandButton value="excluir"  actionListener="#{controlerFuncionario.excluirFuncionario(controlerFuncionario.selectFuncionario)}" 
+                                                 oncomplete="PF('dialExcFunc').hide();" update=":lstFuncionario:singleFunc"/>
+
+
+                            </h:form>
+                        </p:panelGrid>
+                    </h:form>
+                </p:dialog>
+
+                <p:dialog id="dialEditFunc" widgetVar="dialEditFunc" header="editar funcionario" modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+                          draggable="false">
+                    <h:form id="formEditFunc">
+                        <p:panelGrid id="panelEditFunc" columns="2">
+                            <h:outputLabel value="NOME: "/>
+                            <p:inputText value="#{controlerFuncionario.selectFuncionario.nome}"/>
+
+                            <h:outputLabel value="CÓDIGO: "/>
+                            <p:inputText  value="#{controlerFuncionario.selectFuncionario.id}"/>
+
+                            <h:outputLabel value="E-MAIL: "/>
+                            <p:inputText  value="#{controlerFuncionario.selectFuncionario.email}"/>
+
+                            <h:outputLabel value="TELEFONE: "/>
+                            <p:inputText  value="#{controlerFuncionario.selectFuncionario.telefone}"/>
+
+                            <h:outputLabel value="DATA DE ADMISSAO: "/>
+                            <p:inputText  value="#{controlerFuncionario.selectFuncionario.dataAdmissao}"/>
+
+                            <h:outputLabel value="RUA: "/>
+                            <p:inputText  value="#{controlerFuncionario.selectFuncionario.endereco.rua}"/>
+
+                            <h:outputLabel value="CIDADE: "/>
+                            <p:inputText  value="#{controlerFuncionario.selectFuncionario.endereco.cidade}"/>
+
+                            <h:outputLabel value="NUMERO: "/>
+                            <p:inputText  value="#{controlerFuncionario.selectFuncionario.endereco.numero}"/>
+
+                            <h:outputLabel value="CEP: "/>
+                            <p:inputText  value="#{controlerFuncionario.selectFuncionario.endereco.cep}"/>
+                        </p:panelGrid>
+                    </h:form>
+                    <p:panelGrid  columns="2">
+                        <h:form>
+                            <p:commandButton value="editar" actionListener="#{controlerFuncionario.apdtFuncionario(controlerFuncionario.selectFuncionario)}"
+                                             oncomplete="PF('dialEditFunc').hide();" update=":lstFuncionario:singleFunc"/>
+                        </h:form>
+                    </p:panelGrid>
+                </p:dialog>
+            </ui:define>
+
+
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -50,22 +50,9 @@
                             <h:outputText value="#{produto.marca}"/>
                         </p:column>
 
-                        <!--
-                                                <p:column>
-                                                    <f:facet name="header">
-                                                        <h:outputText value="EXCLUIR"/>
-                                                    </f:facet>
-                        
-                                                    <p:commandButton value="EXCLUIR" action="#{controlerProduto.excluir(controlerProduto.selectProduto)}">
-                                                        <f:setPropertyActionListener value="#{produto}" target="#{controlerProduto.selectProduto}"/>
-                                                    </p:commandButton>
-                                                </p:column>-->
-
                         <p:column headerText="OPÇÕES" width="80">
-                            
-                                <p:commandButton icon="ui-icon-trash"  oncomplete="PF('prodDialExcluir').show();" update=""/> 
-                                <p:commandButton icon="ui-icon-pencil"  oncomplete="PF('prodDialEditProd').show();" /> 
-                           
+                            <p:commandButton icon="ui-icon-trash"  oncomplete="PF('prodDialExcluir').show();" update=""/> 
+                            <p:commandButton icon="ui-icon-pencil"  oncomplete="PF('prodDialEditProd').show();" update=":formEditProd:panelEditProd" />
                         </p:column>
                     </p:dataTable>
 
@@ -73,31 +60,30 @@
                 <p:dialog id="idDialExc" header="EXCLUIR-PRODUTO" widgetVar="prodDialExcluir" >
                     <form id="formRemProd">
                         <p:panelGrid id="panExc" columns="2">
-                            <--utputText value="NOME: "/>
-                            
-                            
-                            <p:outputLabel value="#{controlerProduto.selectProduto.nome}"/>
-                            <p:outputLabel value="TIPO: "/>
-                            <p:outputLabel value="#{controlerProduto.selectProduto.tipo}"/>
-                            
-                            <p:outputLabel value="MARCA: "/>
-                            <p:outputLabel value="#{controlerProduto.selectProduto.marca}"/>
-                            
-                            <h:outputText value="PRECO: "/>
-                            <p:outputLabel value="#{controlerProduto.selectProduto.preco}"/>
-                            
-                            <p:outputLabel value="QUANTIDADE: "/>
-                            <p:outputLabel value="#{controlerProduto.selectProduto.quantidade}"/>
                             
                             <h:outputText value="CODIGO: "/>
                             <p:outputLabel value="#{controlerProduto.selectProduto.codigo}"/>
+                            
+                            <h:outputText value="NOME: "/>
+                            <p:outputLabel value="#{controlerProduto.selectProduto.nome}"/>
 
+                            <h:outputText value="TIPO: "/>
+                            <p:outputLabel value="#{controlerProduto.selectProduto.tipo}"/>
+
+                            <h:outputText value="MARCA: "/>
+                            <p:outputLabel value="#{controlerProduto.selectProduto.marca}"/>
+
+                            <h:outputText value="PRECO: "/>
+                            <p:outputLabel value="#{controlerProduto.selectProduto.preco}"/>
+
+                            <h:outputText  value="QUANTIDADE: "/>
+                            <p:outputLabel value="#{controlerProduto.selectProduto.quantidade}"/>
 
                         </p:panelGrid>
                         <p:panelGrid columns="2">
-                            
-                                <p:commandButton value="excluir" actionListener="#{controlerProduto.excluir(controlerProduto.selectProduto)}" oncomplete="PF('prodDialExcluir').hide();" update=""/>
-                            
+                            <h:form >
+                                <p:commandButton value="excluir" actionListener="#{controlerProduto.excluir(controlerProduto.selectProduto)}" oncomplete="PF('prodDialExcluir').hide();" update=":lstProduto:singleProd"/>
+                            </h:form>
                         </p:panelGrid>
                     </form>
                 </p:dialog>
@@ -105,7 +91,8 @@
                 <p:dialog id="idDialEditProd" header="EDITAR-PRODUTO" widgetVar="prodDialEditProd" modal="true" showEffect="fade" hideEffect="fade" resizable="false"
                           draggable="false" >
                     <h:form id="formEditProd">
-                        <p:panelGrid id="panelEditProd">
+                        <p:panelGrid id="panelEditProd" columns="2">
+
                             <h:outputText value="CODIGO:"/>
                             <p:outputLabel value="#{controlerProduto.selectProduto.codigo}"/>
 
@@ -120,12 +107,13 @@
 
                             <p:outputLabel value="TIPO:"/>
                             <p:inputText value="#{controlerProduto.selectProduto.tipo}"/>
+
                         </p:panelGrid>
 
                     </h:form>
                     <p:panelGrid columns="2">
                         <h:form>
-                            <p:commandButton value="ALTERAR" actionListener="#{controlerProduto.alterar(controlerProduto.selectProduto)}" oncomplete="PF('prodDialEditProd').hide();" update=""/>
+                            <p:commandButton value="ALTERAR" actionListener="#{controlerProduto.alterar(controlerProduto.selectProduto)}" oncomplete="PF('prodDialEditProd').hide();" update=":lstProduto:singleProd :idMSGglobal"/>
                         </h:form>
                     </p:panelGrid>
                 </p:dialog>

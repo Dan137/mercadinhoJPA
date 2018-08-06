@@ -7,6 +7,7 @@ package controller;
 
 import Util.Erros;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +15,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import model.ItemVendaModel;
 import model.VendaModel;
+import model.entidade.Cliente;
 import model.entidade.ItemVenda;
 import model.entidade.Produto;
 import model.entidade.Venda;
@@ -31,13 +33,16 @@ public class ControlerVenda implements Serializable {
     private ItemVenda itemVenda;
     private VendaModel vm;
     private ItemVendaModel ivm;
-   
+    private Produto produto;
+    
     public ControlerVenda() {
         this.venda = new Venda();
+        this.venda.setCliente_id(new Cliente());
+        this.produto = new Produto();
         this.itemVenda = new ItemVenda();
+        this.itemVenda.setProduto(this.produto);
         this.ivm = new ItemVendaModel();
         this.vm = new VendaModel();
-       
     }
 
     public Venda getVenda() {
@@ -56,21 +61,35 @@ public class ControlerVenda implements Serializable {
         this.itemVenda = itemVenda;
     }
 
-   
-    
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
 
 //    ======================= NO QUE SE REFERE A ITEM VENDA ====================
     public void cadItemVenda(Integer codigo) {
+        
         try {
+            List<Produto> produtos = new ArrayList();
+                        
             ControlerProduto cv = new ControlerProduto();
-            
-           Produto produto = cv.findId(codigo);
 
-            ItemVenda iv = new ItemVenda(0, 1, produto, null);
+            this.produto = cv.findId(codigo);
+
+            ItemVenda iv = new ItemVenda(null, 1, this.produto, null);
+            
+            produtos.add(this.produto);
             this.ivm.persistItem(iv);
+
+            this.itemVenda.setListProdutos(produtos);
+            
         } catch (Erros ex) {
             Logger.getLogger(ControlerVenda.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     public void altItemVenda(ItemVenda item) {
@@ -88,6 +107,8 @@ public class ControlerVenda implements Serializable {
 //    ======================= NO QUE SE REFERE A VENDA =========================
     public void cadVenda(Venda vend) {
         try {
+            
+            
             this.vm.persistVendaModel(vend);
         } catch (Erros ex) {
             Logger.getLogger(ControlerVenda.class.getName()).log(Level.SEVERE, null, ex);
@@ -116,9 +137,5 @@ public class ControlerVenda implements Serializable {
         } catch (Erros ex) {
             Logger.getLogger(ControlerVenda.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    public void baixaDeProdutos(List<ItemVenda> itens) {
-        this.vm.updatQuantProdutos(itens);
     }
 }

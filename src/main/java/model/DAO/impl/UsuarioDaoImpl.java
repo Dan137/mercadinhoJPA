@@ -15,7 +15,7 @@ import model.DAO.UsuarioDao;
 import model.entidade.Usuario;
 
 /**
- *
+ *0
  * @author Daniel
  */
 public class UsuarioDaoImpl implements UsuarioDao {

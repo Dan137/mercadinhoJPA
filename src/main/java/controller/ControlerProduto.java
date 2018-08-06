@@ -11,8 +11,6 @@ import java.io.Serializable;
 import model.ProdutoModel;
 import model.entidade.Produto;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -25,14 +23,15 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class ControlerProduto implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private Produto produto;
     private ProdutoModel produtomodel;
-    private Produto selectProduto = new Produto();
+    private Produto selectProduto;
 
     public ControlerProduto() {
         this.produto = new Produto();
         this.produtomodel = new ProdutoModel();
-        this.selectProduto = selectProduto;
+        this.selectProduto = new Produto();
     }
 
     public Produto getProduto() {
@@ -53,7 +52,7 @@ public class ControlerProduto implements Serializable {
 
     public void inserir(Produto produto) {
         try {
-           
+
             produtomodel.cadProdModel(produto);
             Messages.getInstance().adicionarMensagem(FacesMessage.SEVERITY_INFO, "Produto cadastrado com sucesso", null);
         } catch (Erros ex) {
@@ -61,9 +60,9 @@ public class ControlerProduto implements Serializable {
         }
     }
 
-    public void alterar(Produto produto) {
+    public void alterar(Produto produ) {
         try {
-            this.produtomodel.atualizarProduto(produto);
+            this.produtomodel.atualizarProduto(produ);
             Messages.getInstance().adicionarMensagem(FacesMessage.SEVERITY_INFO, "Produto atualizado com sucesso", null);
         } catch (Erros ex) {
             Messages.getInstance().adicionarMensagem(FacesMessage.SEVERITY_ERROR, ex.getMessage(), null);
@@ -75,7 +74,7 @@ public class ControlerProduto implements Serializable {
             this.produtomodel.removerProduto(produto);
             Messages.getInstance().adicionarMensagem(FacesMessage.SEVERITY_INFO, "Produto excluido com sucesso", null);
         } catch (Erros ex) {
-           Messages.getInstance().adicionarMensagem(FacesMessage.SEVERITY_ERROR, ex.getMessage(), null);
+            Messages.getInstance().adicionarMensagem(FacesMessage.SEVERITY_ERROR, ex.getMessage(), null);
         }
     }
 
